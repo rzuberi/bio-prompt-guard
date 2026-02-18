@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Safety Checker</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="checker-card">
+        <header class="card-head">
+          <h1>Prompt Safety Checker</h1>
+          <p>Client-side biosecurity risk detection for wet-lab misuse language.</p>
+        </header>
+
+        <section class="settings-row" aria-label="Checker settings">
+          <label class="setting">
+            <span>Mode</span>
+            <select id="modeSelect">
+              <option value="strict">Strict</option>
+              <option value="balanced">Balanced</option>
+            </select>
+          </label>
+          <label class="setting">
+            <span>Runtime</span>
+            <select id="runtimeSelect">
+              <option value="auto">Auto</option>
+              <option value="webllm">WebLLM</option>
+              <option value="heuristic">Heuristic-only</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="status-row" aria-live="polite">
+          <div id="statusBadge" class="status-badge neutral">Type more to analyze</div>
+          <div class="status-meta">
+            <span id="statusScore">Score: --</span>
+            <span id="statusReason">Enter at least 20 characters.</span>
+          </div>
+          <div id="runtimeInfo" class="runtime-info">LLM status: Starting...</div>
+        </section>
+
+        <section class="composer" aria-label="Prompt composer">
+          <div id="highlightLayer" class="highlight-layer" aria-hidden="true"></div>
+          <textarea
+            id="promptInput"
+            spellcheck="false"
+            placeholder="Draft your prompt here. Analysis runs locally in your browser."
+          ></textarea>
+        </section>
+
+        <section class="why-panel">
+          <h2>Why flagged?</h2>
+          <ul id="whyList">
+            <li>Potential risks will be listed after analysis.</li>
+          </ul>
+        </section>
+
+        <footer class="card-foot">
+          This checker runs locally in your browser. No API key required.
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
